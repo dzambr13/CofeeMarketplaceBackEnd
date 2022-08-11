@@ -1,0 +1,28 @@
+{
+  "name": "cofeemarketplacebackend",
+  "version": "1.0.0",
+  "description": "# KOHI logo incoming",
+  "main": "server.js",
+  "scripts": {
+    "dev":"nodemon server.js",
+    "start":"node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzambr13/CofeeMarketplaceBackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzambr13/CofeeMarketplaceBackEnd/issues"
+  },
+  "homepage": "https://github.com/dzambr13/CofeeMarketplaceBackEnd#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "sequelize": "^6.21.3"
+  }
+}

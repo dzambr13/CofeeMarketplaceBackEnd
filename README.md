@@ -1,5 +1,4 @@
-
-# CofeeMarketplaceBackEnd
+# Coffee MarketPlace Back-End
 
 # KOHI logo incoming
-# Coffee MarketPlace Back-End
+

@@ -7,4 +7,6 @@ Router.get("/:member_id", controller.ShowMemberById);
 
 Router.post("/newmember", controller.AddNewMember);
 
+Router.put("/:member_id/edit", controller.UpdateMember);
+
 module.exports = Router;

@@ -29,7 +29,13 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      // <----     reference (migrations for models first, then migrations for associations )
+      roasterId: {                           
+        type: Sequelize.INTEGER,            
+        reference: {
+          model: 'roasters',                   
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

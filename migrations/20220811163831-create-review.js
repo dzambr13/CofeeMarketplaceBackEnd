@@ -14,6 +14,20 @@ module.exports = {
       rating: {
         type: Sequelize.INTEGER,
       },
+      productId: {
+        type: Sequelize.INTEGER,
+        reference: {
+          model: 'products',
+          key: 'id'
+        }
+      },
+      memberId: {
+        type: Sequelize.INTEGER,
+        reference: {
+          model: 'members',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

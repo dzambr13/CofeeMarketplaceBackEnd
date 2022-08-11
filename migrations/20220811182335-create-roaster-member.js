@@ -1,18 +1,26 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('RoasterMembers', {
+    await queryInterface.createTable('roasters_members', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      roasterId: {
-        type: Sequelize.JSON
+      roasterId: {                           
+        type: Sequelize.INTEGER,        
+        reference: {
+          model: 'roasters',          
+          key: 'id'
+        }
       },
-      memberId: {
-        type: Sequelize.JSON
+      memberId: {                           
+        type: Sequelize.INTEGER,        
+        reference: {
+          model: 'members',          
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('RoasterMembers');
+    await queryInterface.dropTable('roasters_members');
   }
 };

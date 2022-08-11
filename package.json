@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/dzambr13/CofeeMarketplaceBackEnd#readme",
   "dependencies": {
-    "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",

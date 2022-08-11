@@ -48,9 +48,23 @@ const ShowMemberById = async (req, res) => {
   }
 };
 
-// delete a member
-
 // update a member
+
+const UpdateMember = async (req, res) => {
+  try {
+    const memberId = parseInt(req.params.member_id);
+
+    const memberToUpdate = await Member.update(req.body, {
+      where: { id: memberId },
+      returning: true,
+    });
+    res.send(memberToUpdate);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// delete a member
 
 // get all members
 
@@ -58,4 +72,5 @@ module.exports = {
   ShowAllMembers,
   ShowMemberById,
   AddNewMember,
+  UpdateMember,
 };

@@ -1,15 +1,12 @@
 const { Member } = require("../models");
 
-
-
-// create a member 
-// get a member 
-// delete a member 
-// update a member 
-// get all members 
+// create a member
+// get a member
+// delete a member
+// update a member
+// get all members
 
 // create a member
-
 
 const AddNewMember = async (req, res) => {
   try {
@@ -65,6 +62,8 @@ const UpdateMember = async (req, res) => {
 };
 
 // delete a member
+
+// start delete function here
 
 // get all members
 

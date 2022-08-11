@@ -29,6 +29,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+      // <----     reference (migrations for models first, then migrations for associations )
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

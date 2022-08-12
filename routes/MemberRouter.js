@@ -24,11 +24,6 @@ Router.delete(
 
 Router.post("/login", controller.Login);
 Router.post("/register", controller.Register);
-Router.put(
-  "/password-update",
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.updatePassword
-);
+Router.put("/password-update", controller.UpdatePassword);
 
 module.exports = Router;

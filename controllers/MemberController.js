@@ -45,13 +45,9 @@ const ShowMemberByName = async (req, res) => {
     //   res.send({...req.body});
 
     let userName = req.body.query;
+    // res.send(userName);
     let results = await Member.findAll({
-      where: { userName },
-      // Gets error "TypeError: s.replace is not a function":
-      //   where: { [Op.like]: { userName: `${userName}` } },
-
-      //Get error "Error: Invalid value { userName: 'JavaFellow90' }"
-      //   where: { [Op.like]: [{ userName: userName }] },
+      where: { userName: { [Op.like]: `%${userName}%` } },
     });
     res.send(results);
   } catch (error) {

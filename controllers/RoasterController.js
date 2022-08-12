@@ -45,8 +45,8 @@ const findARoaster=async (req,res)=>{
         let userName=req.body.query
         let businessName=req.body.query
         let firstName=req.body.query
-        let results=Roaster.findAndCountAll({
-            where: {[Op.or]: [{userName},{businessName},{firstName},{lastName}]}
+        let results=await Roaster.findAndCountAll({
+            where: {[Op.or]: [{userName},{businessName},{firstName}]}
         })
         res.status(200).json(results)
     }catch(error){throw error}

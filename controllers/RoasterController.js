@@ -2,42 +2,46 @@ const {Roaster}=require('../models')
 const {Op} = require("sequelize")
 const middleware=require('../middleware')
 
-
 const Login=async(req,res)=>{
     try{
-      const roaster=await Roaster.findOne({
+      const roaster=await Roaster.findOne({                     // <-- find a user with a matching email
           where:{email:req.body.email},
           raw:true
       })
-      if(user &&(await middleware.comparePassword(roaster.passwordDigest, req.body.password))){
+      if(roaster && (await middleware.comparePassword(          // <-- if there is a user with a matching email
+        roaster.passwordDigest, req.body.password))){           //     and the submitted password === hashed found password
           let payload={id:roaster.id,email:roaster.email}
-          let token = middleware.createToken(payload)
+          let token = middleware.createToken(payload)           // <-- create a JWT 
           return res.send({roaster:payload,token})
       }
-      res.status(401).send({status:'Error',msg:'Unauthorized'})
+      res.status(401).send({status:'Error',msg:'Unauthorized'})  
     }catch(error){throw error}
   }
   const Register=async (req,res)=>{
     try{
-      const {email,password,firstName}=req.body
+      const {email,password,firstName}=req.body                     // <-- send back user infor + password to be hashed
       let passwordDigest=await middleware.hashPassword(password)
-      const roaster=await Roaster.create({email,passwordDigest,firstName})
+      const roaster=await Roaster.create({email,passwordDigest,firstName})  // <-- create the user
       res.send(roaster)
     }catch(error){throw error}
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
+  const updatePassword=async (req,res)=>{
+    try{
+      const roaster=await Roaster.findOne({                    // <-- find user with matching email & password 
+        where:{email:req.body.email}})
+        if(roaster && (await middleware.comparePassword(       // <-- if submitted password === found password (hashed)
+          roaster.dataValues.passwordDigest,
+          req.body.oldPassword))
+        ){
+          let passwordDigest=await middleware.hashPassword(req.body.newPassword)    // then hash the new password & pass to user
+          await roaster.updatePassword({passwordDigest})
+          return res.send({status:'Success',msg:'Password updated'})
+        } 
+        res.status(401).send({status:'Error',msg:'Unauthorized'})
+    }catch(error){throw error}
+  }
 
 
 
@@ -103,7 +107,10 @@ module.exports = {
     getOneRoaster,
     getAllRoasters,
     deleteARoaster,
-    findARoaster
+    findARoaster,  
+    Login,
+    Register,
+    updatePassword
 }
 
 

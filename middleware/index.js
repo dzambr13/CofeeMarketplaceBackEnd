@@ -1,9 +1,11 @@
+require('dotenv').config()
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS)
 const APP_SECRET = process.env.APP_SECRET
-
 const bcrypt=require('bcrypt')
-const jwt=require('jsobwebtoken')
-require('dotenv').config()
+const jwt=require('jsonwebtoken')
+
+
+
 
 const hashPassword=async (password)=>{                              // <--- hashing password
     let hashedPassword=await bcrypt.hash(password,SALT_ROUNDS)
@@ -41,6 +43,8 @@ const createToken=(payload)=>{
     }
   }
 
+
+  
   module.exports={
     stripToken,
     verifyToken,

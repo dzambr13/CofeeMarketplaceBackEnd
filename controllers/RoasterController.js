@@ -2,6 +2,23 @@ const {Roaster}=require('../models')
 const {Op} = require("sequelize")
 const middleware=require('../middleware')
 
+// const updatePassword=async (req,res)=>{
+//     try{
+//         const roaster=await Roaster.findOne({where:{email:req.body.email}})
+//         if(roaster && (await middleware.comparePassword(       
+//             roaster.dataValues.passwordDigest,
+//             req.body.oldPassword))
+//         ){
+//             let passwordDigest=await middleware.hashPassword(req.body.newPassword)     
+//             await updatePassword({passwordDigest})
+//             return res.send({status:'Success',msg:'Password updated'})
+//         } 
+//         res.status(401).send({status:'Error',msg:'Unauthorized'})
+//     }catch(error){throw error}
+// }
+
+
+
 const Login=async(req,res)=>{
     try{
         const roaster=await Roaster.findOne({                    
@@ -17,30 +34,35 @@ const Login=async(req,res)=>{
         res.status(401).send({status:'Error',msg:'Unauthorized'})  
     }catch(error){throw error}
 }
+
 const Register=async (req,res)=>{   
     try{
-        const {email,password,firstName}=req.body                     
+        const {userName,businessName,email,firstName,lastName,password,logoImageUrl}=req.body                     
         let passwordDigest=await middleware.hashPassword(password)
-        const roaster=await Roaster.create({email,passwordDigest,firstName})  
+        const roaster=await Roaster.create({
+            userName,businessName,email,firstName,lastName,passwordDigest,logoImageUrl
+        })  
         res.send(roaster)
     }catch(error){throw error}
   }
-const updatePassword=async (req,res)=>{
+
+  const updatePassword=async (req, res)=>{
     try{
-        const roaster=await Roaster.findOne({where:{email:req.body.email}})
-        if(roaster && (await middleware.comparePassword(       
-            roaster.dataValues.passwordDigest,
-            req.body.oldPassword))
-        ){
-            let passwordDigest=await middleware.hashPassword(req.body.newPassword)     
-            await roaster.updatePassword({passwordDigest})
-            return res.send({status:'Success',msg:'Password updated'})
-        } 
-        res.status(401).send({status:'Error',msg:'Unauthorized'})
+      const roaster=await Roaster.findOne({where:{email:req.body.email}})
+      if(
+        roaster &&
+        (await middleware.comparePassword(
+          roaster.dataValues.passwordDigest,
+          req.body.oldPassword
+        ))
+      ){
+        let passwordDigest = await middleware.hashPassword(req.body.newPassword)
+        await roaster.update({ passwordDigest })
+        return res.send({status:'Success',msg:'Password Updated'})
+      }
+      res.status(401).send({status:'Error',msg:'Invalid Credentials'})
     }catch(error){throw error}
 }
-
-
 
 
 const updateRoaster=async (req,res)=>{

@@ -47,6 +47,16 @@ const ShowMemberById = async (req, res) => {
   }
 };
 
+// find a member by name
+
+const ShowMemberByName = async (req, res) => {
+  try {
+    const memberNameSearch = await Member.find;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // update a member
 
 const UpdateMember = async (req, res) => {

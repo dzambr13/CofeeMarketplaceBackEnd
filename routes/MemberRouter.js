@@ -1,5 +1,6 @@
 const Router = require("express").Router();
 const controller = require("../controllers/MemberController");
+const middleware = require("../middleware");
 
 Router.get("/search", controller.ShowMemberByName);
 

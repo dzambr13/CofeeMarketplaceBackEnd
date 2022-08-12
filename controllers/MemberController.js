@@ -33,7 +33,6 @@ const ShowAllMembers = async (req, res) => {
 const ShowMemberById = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
-
     const selectedMember = await Member.findByPk(memberId);
     res.send(selectedMember);
   } catch (error) {
@@ -45,8 +44,10 @@ const ShowMemberById = async (req, res) => {
 
 const ShowMemberByName = async (req, res) => {
   try {
+    const allMembers = await Member.findAll();
+    res.send(allMembers);
+
     // let searchCriteria = { ...req.body };
-    res.send({ ...req.body });
     // const memberToSearch = await Member.findAll({
     //   where: { userName: { [Op.like]: `%${searchCriteria}%` } },
     // });
@@ -61,7 +62,6 @@ const ShowMemberByName = async (req, res) => {
 const UpdateMember = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
-
     const memberToUpdate = await Member.update(req.body, {
       where: { id: memberId },
       returning: true,

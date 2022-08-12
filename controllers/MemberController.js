@@ -1,4 +1,6 @@
-const { Member } = require("../models");
+const { Member, Sequelize } = require("../models");
+const { Op } = require("Sequelize");
+const Op = Sequelize.Op;
 
 // create a member
 // get a member

@@ -1,5 +1,6 @@
 const Router=require('express').Router()
 const controller=require('../controllers/RoasterController')
+const middleware=require('../middleware')
 
 Router.get('/find',controller.findARoaster)
 Router.post('/create',controller.createRoaster)
@@ -8,9 +9,12 @@ Router.get('/:pk',controller.getOneRoaster)
 Router.get('/',controller.getAllRoasters)
 Router.delete('/delete/:pk',controller.deleteARoaster)
 
-module.exports = Router
+ 
+Router.post('/login',controller.Login)  
+
+Router.post('/register',controller.Register) // works 
+
+Router.put('/password-update',controller.updatePassword) 
 
 
-
-
-  
+module.exports=Router

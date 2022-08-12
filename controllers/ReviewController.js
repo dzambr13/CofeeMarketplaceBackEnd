@@ -30,15 +30,6 @@ const GetOneReview = async (req, res) => {
     throw error
   }
 }
-// get all reviews
-const GetAllReviews = async (req, res) => {
-  try {
-    const reviews = await Reviews.findAll()
-    res.send(reviews)
-  } catch (error) {
-    throw error
-  }
-}
 // delete review
 const DeleteReview = async (req, res) => {
   try {

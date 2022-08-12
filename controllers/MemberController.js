@@ -45,6 +45,7 @@ const ShowMemberById = async (req, res) => {
     throw error;
   }
 };
+
 const ShowMemberByName = async (req, res) => {
   try {
     let userName = req.body.query;

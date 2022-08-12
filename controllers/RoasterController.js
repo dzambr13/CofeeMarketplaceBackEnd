@@ -16,8 +16,8 @@ const Login=async(req,res)=>{
       }
       res.status(401).send({status:'Error',msg:'Unauthorized'})  
     }catch(error){throw error}
-  }
-  const Register=async (req,res)=>{
+}
+  const Register=async (req,res)=>{   
     try{
       const {email,password,firstName}=req.body                     // <-- send back user infor + password to be hashed
       let passwordDigest=await middleware.hashPassword(password)

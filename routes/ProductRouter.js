@@ -11,13 +11,13 @@ router.post(
 ) //Add protection
 router.get('/', controller.AllProducts)
 router.put(
-  '/product/:id',
+  '/update/:id',
   middleware.stripToken,
   middleware.verifyToken,
   controller.UpdateProduct
 ) //Add protection
 router.delete(
-  '/product/:id',
+  '/delete/:pd',
   middleware.stripToken,
   middleware.verifyToken,
   controller.DeleteProduct

@@ -10,7 +10,7 @@ router.post(
   controller.CreateReview
 ) //Add protection
 router.delete(
-  '/review/:id',
+  '/delete/:or',
   middleware.stripToken,
   middleware.verifyToken,
   controller.DeleteReview

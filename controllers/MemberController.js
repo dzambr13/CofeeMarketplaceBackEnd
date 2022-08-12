@@ -75,7 +75,21 @@ const UpdateMember = async (req, res) => {
 };
 
 // delete a member
+const DeleteMember = async (req, res) => {
+  try {
+    const memberId = parseInt(req.params.member_id);
 
+    const memberToDelete = await Member.findByPk(memberId);
+
+    await Member.destroy({
+      where: { id: memberId },
+    });
+    // res.send(`This user's account was deleted: ${memberToDelete}`);
+    res.send(memberToDelete);
+  } catch (error) {
+    throw error;
+  }
+};
 // get all members
 
 module.exports = {
@@ -84,4 +98,5 @@ module.exports = {
   ShowMemberByName,
   AddNewMember,
   UpdateMember,
+  DeleteMember,
 };

@@ -3,9 +3,24 @@ const controller = require('../controllers/ProductController')
 const middleware = require('../middleware')
 
 router.get('/', controller.OneProduct)
-router.post('/', controller.CreateProduct) //Add protection
+router.post(
+  '/',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.CreateProduct
+) //Add protection
 router.get('/', controller.AllProducts)
-router.put('/:product_id', controller.UpdateProduct) //Add protection
-router.delete('/:product_id', controller.DeleteProduct) //Add protection
+router.put(
+  '/product/:id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.UpdateProduct
+) //Add protection
+router.delete(
+  '/product/:id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.DeleteProduct
+) //Add protection
 
 module.exports = router

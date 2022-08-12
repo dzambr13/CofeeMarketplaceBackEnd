@@ -1,6 +1,8 @@
+
 const { Member } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+
 
 const AddNewMember = async (req, res) => {
   try {

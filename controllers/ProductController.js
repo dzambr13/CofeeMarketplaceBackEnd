@@ -20,7 +20,7 @@ const OneProduct = async (req, res) => {
   }
 }
 // get all products
-const Product = async (req, res) => {
+const AllProducts = async (req, res) => {
   try {
     const items = await Item.findAll()
     res.send(items)
@@ -56,7 +56,7 @@ const DeleteProduct = async (req, res) => {
 
 module.exports = {
   CreateProduct,
-  Product,
+  AllProducts,
   OneProduct,
   UpdateProduct,
   DeleteProduct

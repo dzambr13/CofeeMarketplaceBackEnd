@@ -39,8 +39,17 @@ const ShowMemberById = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id)
 
+
+    let userName = req.body.query;
+    // res.send(userName);
+    let results = await Member.findAll({
+      where: { userName: { [Op.like]: `%${userName}%` } },
+    });
+    res.send(results);
+
     const selectedMember = await Member.findByPk(memberId)
     res.send(selectedMember)
+
   } catch (error) {
     throw error
   }

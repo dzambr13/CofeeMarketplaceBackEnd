@@ -1,4 +1,45 @@
 const {Roaster}=require('../models')
+const {Op} = require("sequelize")
+const middleware=require('../middleware')
+
+
+const Login=async(req,res)=>{
+    try{
+      const roaster=await Roaster.findOne({
+          where:{email:req.body.email},
+          raw:true
+      })
+      if(user &&(await middleware.comparePassword(roaster.passwordDigest, req.body.password))){
+          let payload={id:roaster.id,email:roaster.email}
+          let token = middleware.createToken(payload)
+          return res.send({roaster:payload,token})
+      }
+      res.status(401).send({status:'Error',msg:'Unauthorized'})
+    }catch(error){throw error}
+  }
+  const Register=async (req,res)=>{
+    try{
+      const {email,password,firstName}=req.body
+      let passwordDigest=await middleware.hashPassword(password)
+      const roaster=await Roaster.create({email,passwordDigest,firstName})
+      res.send(roaster)
+    }catch(error){throw error}
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const createRoaster=async (req,res)=>{
     try{
@@ -39,13 +80,30 @@ const deleteARoaster=async (req,res)=>{
         })  
     }catch(error){throw error}
 }
+const findARoaster=async (req,res)=>{
+    try{
+        let userName=req.body.query
+        let businessName=req.body.query
+        let firstName=req.body.query
+        let results=await Roaster.findAndCountAll({
+            where: {[Op.or]: [{userName},{businessName},{firstName}]}
+        })
+        res.status(200).json(results)
+    }catch(error){throw error}
+}
+
+ 
+
+
+
 
 module.exports = {
     createRoaster,
     updateRoaster,
     getOneRoaster,
     getAllRoasters,
-    deleteARoaster
+    deleteARoaster,
+    findARoaster
 }
 
 

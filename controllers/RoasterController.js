@@ -1,4 +1,5 @@
 const {Roaster}=require('../models')
+const {Op} = require("sequelize")
 
 const createRoaster=async (req,res)=>{
     try{
@@ -39,13 +40,30 @@ const deleteARoaster=async (req,res)=>{
         })  
     }catch(error){throw error}
 }
+const findARoaster=async (req,res)=>{
+    try{
+        let userName=req.body.query
+        let businessName=req.body.query
+        let firstName=req.body.query
+        let results=Roaster.findAndCountAll({
+            where: {[Op.or]: [{userName},{businessName},{firstName},{lastName}]}
+        })
+        res.status(200).json(results)
+    }catch(error){throw error}
+}
+
+ 
+
+
+
 
 module.exports = {
     createRoaster,
     updateRoaster,
     getOneRoaster,
     getAllRoasters,
-    deleteARoaster
+    deleteARoaster,
+    findARoaster
 }
 
 

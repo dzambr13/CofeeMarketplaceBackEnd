@@ -14,17 +14,19 @@ Router.put(
   middleware.stripToken,
   middleware.verifyToken,
   controller.UpdateMember
-)
+);
 
 Router.delete(
   "/:member_id/delete",
   middleware.stripToken,
   middleware.verifyToken,
   controller.DeleteMember
-)
+);
 
 Router.post("/login", controller.Login);
 Router.post("/register", controller.Register);
+
+
 
 
 
@@ -33,7 +35,11 @@ Router.put(
   middleware.stripToken,
   middleware.verifyToken,
   controller.UpdatePassword
+
+);
+
 )
+
 
 
 module.exports = Router;

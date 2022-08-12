@@ -1,8 +1,6 @@
-
 const { Member } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-
 
 const AddNewMember = async (req, res) => {
   try {
@@ -44,14 +42,18 @@ const ShowMemberById = async (req, res) => {
 
 const ShowMemberByName = async (req, res) => {
   try {
-    const allMembers = await Member.findAll();
-    res.send(allMembers);
+    //   res.send({...req.body});
 
-    // let searchCriteria = { ...req.body };
-    // const memberToSearch = await Member.findAll({
-    //   where: { userName: { [Op.like]: `%${searchCriteria}%` } },
-    // });
-    // res.send(memberToSearch);
+    let userName = req.body.query;
+    let results = await Member.findAll({
+      where: { userName },
+      // Gets error "TypeError: s.replace is not a function":
+      //   where: { [Op.like]: { userName: `${userName}` } },
+
+      //Get error "Error: Invalid value { userName: 'JavaFellow90' }"
+      //   where: { [Op.like]: [{ userName: userName }] },
+    });
+    res.send(results);
   } catch (error) {
     throw error;
   }

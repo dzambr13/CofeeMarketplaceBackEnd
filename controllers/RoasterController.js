@@ -17,7 +17,6 @@ const Login=async(req,res)=>{
         res.status(401).send({status:'Error',msg:'Unauthorized'})  
     }catch(error){throw error}
 }
-
 const Register=async (req,res)=>{   
     try{
         const {userName,businessName,email,firstName,lastName,password,logoImageUrl}=req.body                     
@@ -25,7 +24,7 @@ const Register=async (req,res)=>{
         const roaster=await Roaster.create({
             userName,businessName,email,firstName,lastName,passwordDigest,logoImageUrl
         })  
-        res.send(roaster)
+        res.status(200).json(roaster)
     }catch(error){throw error}
   }
 
@@ -41,7 +40,7 @@ const updatePassword=async (req, res)=>{
     ){
         let passwordDigest = await middleware.hashPassword(req.body.newPassword)
         await roaster.update({ passwordDigest })
-        return res.send({status:'Success',msg:'Password Updated'})
+        res.status(200).json({status:'Success',msg:'Password Updated'})
     }
     res.status(401).send({status:'Error',msg:'Invalid Credentials'})
     }catch(error){throw error}

@@ -1,5 +1,8 @@
-const { Member, Sequelize } = require("../models");
-const { Op } = require("Sequelize");
+
+const { Member } = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 
 const AddNewMember = async (req, res) => {
   try {
@@ -42,7 +45,12 @@ const ShowMemberById = async (req, res) => {
 
 const ShowMemberByName = async (req, res) => {
   try {
-    const memberNameSearch = await Member.find;
+    // let searchCriteria = { ...req.body };
+    res.send({ ...req.body });
+    // const memberToSearch = await Member.findAll({
+    //   where: { userName: { [Op.like]: `%${searchCriteria}%` } },
+    // });
+    // res.send(memberToSearch);
   } catch (error) {
     throw error;
   }
@@ -87,6 +95,7 @@ const DeleteMember = async (req, res) => {
 module.exports = {
   ShowAllMembers,
   ShowMemberById,
+  ShowMemberByName,
   AddNewMember,
   UpdateMember,
   DeleteMember,

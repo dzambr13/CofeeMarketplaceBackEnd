@@ -5,6 +5,8 @@ Router.get("/", controller.ShowAllMembers);
 
 Router.get("/:member_id", controller.ShowMemberById);
 
+Router.get("/search", controller.ShowMemberByName);
+
 Router.post("/newmember", controller.AddNewMember);
 
 Router.put("/:member_id/edit", controller.UpdateMember);

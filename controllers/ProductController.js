@@ -13,8 +13,9 @@ const CreateProduct = async (req, res) => {
 // get one product
 const OneProduct = async (req, res) => {
   try {
-    const one = await One.findOne()
-    res.send(one)
+    const { pd } = req.params
+    const one = await Product.findByOr(pd)
+    res.status(200).json(one)
   } catch (error) {
     throw error
   }
@@ -23,7 +24,7 @@ const OneProduct = async (req, res) => {
 const AllProducts = async (req, res) => {
   try {
     const items = await Item.findAll()
-    res.send(items)
+    res.status(200).json(items)
   } catch (error) {
     throw error
   }
@@ -31,11 +32,12 @@ const AllProducts = async (req, res) => {
 // update a product
 const UpdateProduct = async (req, res) => {
   try {
-    const updateProd = await UpdateProd.create(
-      { ...req.body },
-      { where: { id: req.params.post_id }, returning: true }
-    )
-    res.send(updateProd)
+    const { pd } = req.params
+    let updatedProduct = await Product.update(req.body, {
+      where: { id: pd },
+      returning: true
+    })
+    res.status(200).json(updatedProduct)
   } catch (error) {
     throw error
   }
@@ -43,11 +45,13 @@ const UpdateProduct = async (req, res) => {
 // delete product
 const DeleteProduct = async (req, res) => {
   try {
-    await Product.destroy({ where: { id: req.params.post } })
-    res.send({
-      msg: 'Product Deleted',
-      payload: req.params.post_id,
-      status: 'Ok'
+    const { pd } = req.params
+    const deletedProduct = await Product.findByPd(pd)
+    let pdt = Object.assign({}, deletedProduct)
+    await Product.destroy({ where: { id: pd } })
+    res.status(200).json({
+      alert: `Deleted Product wiht an ID of ${pd}`,
+      destroyed: pd
     })
   } catch (error) {
     throw error

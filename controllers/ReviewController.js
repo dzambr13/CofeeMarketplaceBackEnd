@@ -10,22 +10,12 @@ const CreateReview = async (req, res) => {
     throw error
   }
 }
-// update review
-const UpdateReview = async (req, res) => {
-  try {
-    const review = await Review.update(
-      { ...req.body },
-      { where: { id: req.params.post_id }, returning: true }
-    )
-  } catch (error) {
-    throw error
-  }
-}
 // get one review
 const GetOneReview = async (req, res) => {
   try {
-    const review = await Review.findOne()
-    res.send(review)
+    const { or } = req.params
+    const foundReview = await Review.findByOr(or)
+    res.status(200).json(foundReview)
   } catch (error) {
     throw error
   }
@@ -33,11 +23,13 @@ const GetOneReview = async (req, res) => {
 // delete review
 const DeleteReview = async (req, res) => {
   try {
-    await Review.destory({ where: { id: req.params.review_id } })
-    res.send({
-      msg: 'Review Deleted',
-      payload: req.params.review_id,
-      status: 'Ok'
+    const { or } = req.params
+    const deletedReview = await Review.findByOr(or)
+    let rvw = Object.assign({}, deletedReview)
+    await Review.destory({ where: { id: or } })
+    res.status(200).json({
+      alert: `Delete Review with an ID of ${or}`,
+      destroyed: rvw
     })
   } catch (error) {
     throw error
@@ -46,8 +38,6 @@ const DeleteReview = async (req, res) => {
 
 module.exports = {
   CreateReview,
-  UpdateReview,
   GetOneReview,
-  GetAllReviews,
   DeleteReview
 }

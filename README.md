@@ -26,11 +26,15 @@
 
 ### **_Description_**
 
-#### placeholder
+#### **Our team will produce a marketplace app for independent coffee roasters to marker their blends directly to customers.**
+
+### MVP
+
+**Initial functionality will enable roasters and clients to register and log into the app. Clients will be able to edit their account info, and save products and roasters to a list. Roasters will be able to add, edit and delete products that they offer.**
 
 ---
 
-### **_Methods used_**
+### **_Technologies used_**
 
 - PostgreSQL
 - Express.js
@@ -55,7 +59,7 @@
 
 ### **_Future Updates_**
 
-- [] TBD
+- [] Add review functionality
 - [] TBD
 - [] TBD
 

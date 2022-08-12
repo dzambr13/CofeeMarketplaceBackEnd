@@ -1,4 +1,5 @@
 const { Member } = require("../models");
+
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const middleware=require('../middleware')
@@ -43,6 +44,15 @@ const updatePassword=async (req,res)=>{
 }
 
 
+// create a member
+// get a member
+// delete a member
+// update a member
+// get all members
+
+// create a member
+
+id;
 const AddNewMember = async (req, res) => {
   try {
     let newMemberInfo = {
@@ -72,6 +82,7 @@ const ShowAllMembers = async (req, res) => {
 const ShowMemberById = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
+
     const selectedMember = await Member.findByPk(memberId);
     res.send(selectedMember);
   } catch (error) {
@@ -79,28 +90,24 @@ const ShowMemberById = async (req, res) => {
   }
 };
 
-// find a member by name
-
 const ShowMemberByName = async (req, res) => {
   try {
-    const allMembers = await Member.findAll();
-    res.send(allMembers);
-
-    // let searchCriteria = { ...req.body };
-    // const memberToSearch = await Member.findAll({
-    //   where: { userName: { [Op.like]: `%${searchCriteria}%` } },
-    // });
-    // res.send(memberToSearch);
+    let userName = req.body.query;
+    // res.send(userName);
+    let results = await Member.findAll({
+      where: { userName: { [Op.like]: `%${userName}%` } },
+    });
+    res.send(results);
   } catch (error) {
     throw error;
   }
 };
-
 // update a member
 
 const UpdateMember = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
+
     const memberToUpdate = await Member.update(req.body, {
       where: { id: memberId },
       returning: true,
@@ -112,7 +119,6 @@ const UpdateMember = async (req, res) => {
 };
 
 // delete a member
-
 const DeleteMember = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
@@ -128,7 +134,6 @@ const DeleteMember = async (req, res) => {
     throw error;
   }
 };
-
 // get all members
 
 module.exports = {

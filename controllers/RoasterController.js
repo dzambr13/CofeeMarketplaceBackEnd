@@ -2,6 +2,7 @@ const { Roaster } = require('../models')
 const { Op } = require('sequelize')
 const middleware = require('../middleware')
 
+
 // const updatePassword=async (req,res)=>{
 //     try{
 //         const roaster=await Roaster.findOne({where:{email:req.body.email}})
@@ -99,6 +100,58 @@ const updateRoaster = async (req, res) => {
   } catch (error) {
     throw error
   }
+
+const Login=async(req,res)=>{
+    try{
+        const roaster=await Roaster.findOne({                    
+            where:{email:req.body.email},
+            raw:true
+        })
+      if(roaster && (await middleware.comparePassword(          
+        roaster.passwordDigest, req.body.password))){           
+            let payload={id:roaster.id,email:roaster.email}
+            let token = middleware.createToken(payload)          
+            return res.send({roaster:payload,token})
+        }
+        res.status(401).send({status:'Error',msg:'Unauthorized'})  
+    }catch(error){throw error}
+}
+const Register=async (req,res)=>{   
+    try{
+        const {userName,businessName,email,firstName,lastName,password,logoImageUrl}=req.body                     
+        let passwordDigest=await middleware.hashPassword(password)
+        const roaster=await Roaster.create({
+            userName,businessName,email,firstName,lastName,passwordDigest,logoImageUrl
+        })  
+        res.status(200).json(roaster)
+    }catch(error){throw error}
+  }
+
+const updatePassword=async (req, res)=>{
+    try{
+        const roaster=await Roaster.findOne({where:{email:req.body.email}})
+        if(
+        roaster &&
+        (await middleware.comparePassword(
+          roaster.dataValues.passwordDigest,
+          req.body.oldPassword
+        ))
+    ){
+        let passwordDigest = await middleware.hashPassword(req.body.newPassword)
+        await roaster.update({ passwordDigest })
+        res.status(200).json({status:'Success',msg:'Password Updated'})
+    }
+    res.status(401).send({status:'Error',msg:'Invalid Credentials'})
+    }catch(error){throw error}
+}
+
+const updateRoaster=async (req,res)=>{
+    try{
+        const {pk}=req.params
+        let updatedRoaster=await Roaster.update(req.body,{where:{id:pk},returning:true})
+        res.status(200).json(updatedRoaster) 
+    }catch(error){throw error}
+
 }
 const getOneRoaster = async (req, res) => {
   try {

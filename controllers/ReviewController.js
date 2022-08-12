@@ -1,7 +1,6 @@
 const { Review } = require('../models')
 const middleware = require('../middleware')
 
-// create review
 const CreateReview = async (req, res) => {
   try {
     const review = await Review.create({ ...req.body })
@@ -10,7 +9,20 @@ const CreateReview = async (req, res) => {
     throw error
   }
 }
+
 // get one review
+
+const UpdateReview = async (req, res) => {
+  try {
+    const review = await Review.update(
+      { ...req.body },
+      { where: { id: req.params.post_id }, returning: true }
+    )
+  } catch (error) {
+    throw error
+  }
+}
+
 const GetOneReview = async (req, res) => {
   try {
     const { or } = req.params
@@ -20,7 +32,6 @@ const GetOneReview = async (req, res) => {
     throw error
   }
 }
-// delete review
 const DeleteReview = async (req, res) => {
   try {
     const { or } = req.params

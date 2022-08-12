@@ -1,7 +1,6 @@
 const { Product } = require('../models')
 const middleware = require('../middleware')
 
-// create product
 const CreateProduct = async (req, res) => {
   try {
     const prod = await Product.create({ ...req.body })
@@ -10,7 +9,6 @@ const CreateProduct = async (req, res) => {
     throw error
   }
 }
-// get one product
 const OneProduct = async (req, res) => {
   try {
     const { pd } = req.params
@@ -20,7 +18,6 @@ const OneProduct = async (req, res) => {
     throw error
   }
 }
-// get all products
 const AllProducts = async (req, res) => {
   try {
     const items = await Item.findAll()
@@ -29,7 +26,6 @@ const AllProducts = async (req, res) => {
     throw error
   }
 }
-// update a product
 const UpdateProduct = async (req, res) => {
   try {
     const { pd } = req.params
@@ -42,7 +38,6 @@ const UpdateProduct = async (req, res) => {
     throw error
   }
 }
-// delete product
 const DeleteProduct = async (req, res) => {
   try {
     const { pd } = req.params

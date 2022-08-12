@@ -22,8 +22,6 @@
 [GitHub](https://github.com/dzambr13) |
 [Instagram](https://www.instagram.com/dayvuhh/)
 
-#### [Trello] (https://trello.com/b/TCsr67Pj/coffee-tea)
-
 ---
 
 ### **_Description_**
@@ -64,6 +62,8 @@
 ---
 
 ### **_Credits_**
+
+#### [Trello] (https://trello.com/b/TCsr67Pj/coffee-tea)
 
 #### [Heroku] (OurWebsiteLinkGoesHere)
 

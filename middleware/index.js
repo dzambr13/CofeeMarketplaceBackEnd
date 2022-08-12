@@ -9,7 +9,7 @@ const jwt=require('jsonwebtoken')
 
 const hashPassword=async (password)=>{                              // <--- hashing password
     let hashedPassword=await bcrypt.hash(password,SALT_ROUNDS)
-    return hashPassword
+    return hashedPassword
 }
 const comparePassword=async (storedPassword,password)=>{
     let passwordMatch=await bcrypt.compare(password,storedPassword)

@@ -23,8 +23,9 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      password: {
+      passwordDigest: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       logoImageUrl: {
         type: Sequelize.STRING,

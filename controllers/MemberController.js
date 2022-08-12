@@ -44,7 +44,7 @@ const Register = async (req, res) => {
     throw error;
   }
 };
-const updatePassword = async (req, res) => {
+const UpdatePassword = async (req, res) => {
   try {
     const member = await Member.findOne({ where: { email: req.body.email } });
     if (
@@ -55,10 +55,11 @@ const updatePassword = async (req, res) => {
       ))
     ) {
       let passwordDigest = await middleware.hashPassword(req.body.newPassword);
-      await member.updatePassword({ passwordDigest });
-      return res.send({ status: "Success", msg: "Password updated" });
+
+      await member.update({ passwordDigest });
+      return res.send({ status: "Success", msg: "Password Updated" });
     }
-    res.status(401).send({ status: "Error", msg: "Unauthorized" });
+    res.status(401).send({ status: "Error", msg: "Invalid Credentials" });
   } catch (error) {
     throw error;
   }
@@ -164,5 +165,5 @@ module.exports = {
   DeleteMember,
   Login,
   Register,
-  updatePassword,
+  UpdatePassword,
 };

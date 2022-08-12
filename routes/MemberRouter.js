@@ -9,4 +9,6 @@ Router.post("/newmember", controller.AddNewMember);
 
 Router.put("/:member_id/edit", controller.UpdateMember);
 
+Router.delete("/:member_id/delete", controller.DeleteMember);
+
 module.exports = Router;

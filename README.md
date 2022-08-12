@@ -4,6 +4,24 @@
 
 ## By: James Jewitt, Leon Glaser, Dave Zambrano
 
+### James Jewitt
+
+[LinkedIn](https://www.linkedin.com/in/james-jewitt/) |
+[GitHub](https://github.com/jamest7783) |
+[Trello](https://trello.com/b/Mc0uEhTG/quickchart)
+
+### Leon Glaser
+
+[LinkedIn](https://www.linkedin.com/in/leon-glaser) |
+[Twitter](https://twitter.com/sirescapist) |
+[GitHub](https://github.com/lnglaser)
+
+### Dave Zambrano
+
+[LinkedIn](https://www.linkedin.com/in/davezambr/) |
+[GitHub](https://github.com/dzambr13) |
+[Instagram](https://www.instagram.com/dayvuhh/)
+
 #### [Trello] (https://trello.com/b/TCsr67Pj/coffee-tea)
 
 ---

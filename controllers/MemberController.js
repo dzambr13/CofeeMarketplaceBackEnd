@@ -1,7 +1,46 @@
-
 const { Member } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const middleware=require('../middleware')
+
+
+const Login=async(req,res)=>{
+  try{
+      const member=await Member.findOne({                    
+          where:{email:req.body.email},
+          raw:true
+      })
+    if(member && (await middleware.comparePassword(          
+      member.passwordDigest, req.body.password))){           
+          let payload={id:member.id,email:roaster.email}
+          let token = middleware.createToken(payload)          
+          return res.send({member:payload,token})
+      }
+      res.status(401).send({status:'Error',msg:'Unauthorized'})  
+  }catch(error){throw error}
+}
+const Register=async (req,res)=>{   
+  try{
+      const {email,password,firstName}=req.body                     
+      let passwordDigest=await middleware.hashPassword(password)
+      const member=await Member.create({email,passwordDigest,firstName})  
+      res.send(member)
+  }catch(error){throw error}
+}
+const updatePassword=async (req,res)=>{
+  try{
+      const member=await Member.findOne({where:{email:req.body.email}})
+      if(member && (await middleware.comparePassword(       
+          member.dataValues.passwordDigest,
+          req.body.oldPassword))
+      ){
+          let passwordDigest=await middleware.hashPassword(req.body.newPassword)     
+          await member.updatePassword({passwordDigest})
+          return res.send({status:'Success',msg:'Password updated'})
+      } 
+      res.status(401).send({status:'Error',msg:'Unauthorized'})
+  }catch(error){throw error}
+}
 
 
 const AddNewMember = async (req, res) => {
@@ -99,4 +138,7 @@ module.exports = {
   AddNewMember,
   UpdateMember,
   DeleteMember,
+  Login,
+  Register,
+  updatePassword
 };

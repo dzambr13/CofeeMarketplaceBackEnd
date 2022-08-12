@@ -63,9 +63,9 @@
 
 ### **_Credits_**
 
-#### [Trello] (https://trello.com/b/TCsr67Pj/coffee-tea)
-
 #### [Heroku] (OurWebsiteLinkGoesHere)
+
+#### [Trello] (https://trello.com/b/TCsr67Pj/coffee-tea)
 
 #### [Markdown] (https://github.com/SEI-R-6-21/u1_hw_markdown)
 

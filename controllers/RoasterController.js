@@ -1,7 +1,5 @@
 const {Roaster}=require('../models')
 
-/////
-
 const createRoaster=async (req,res)=>{
     try{
         const newRoaster=await Roaster.create()
@@ -32,8 +30,13 @@ const getAllRoasters=async (req,res)=>{
 const deleteARoaster=async (req,res)=>{
     try{
         const {pk}=req.params
-        const deleletedRoaster=await Roaster.destroy({where:{id:pk}})
-        res.status(200).json({alert:`Delete Roaster with an ID of ${pk}`})  
+        const deleletedRoaster=await Roaster.findByPk(pk)
+        let msg = Object.assign({},deleletedRoaster)
+        await Roaster.destroy({where:{id:pk}})
+        res.status(200).json({
+            alert:`Delete Roaster with an ID of ${pk}`,
+            destroyed:msg
+        })  
     }catch(error){throw error}
 }
 

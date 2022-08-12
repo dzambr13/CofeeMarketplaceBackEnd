@@ -1,4 +1,6 @@
-const { Member } = require("../models");
+const { Member, Sequelize } = require("../models");
+const { Op } = require("Sequelize");
+const Op = Sequelize.Op;
 
 const AddNewMember = async (req, res) => {
   try {
@@ -32,6 +34,16 @@ const ShowMemberById = async (req, res) => {
 
     const selectedMember = await Member.findByPk(memberId);
     res.send(selectedMember);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// find a member by name
+
+const ShowMemberByName = async (req, res) => {
+  try {
+    const memberNameSearch = await Member.find;
   } catch (error) {
     throw error;
   }

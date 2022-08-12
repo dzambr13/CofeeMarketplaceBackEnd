@@ -1,4 +1,5 @@
 const { Review } = require('../models')
+const middleware = require('../middleware')
 
 // create review
 const CreateReview = async (req, res) => {
@@ -25,15 +26,6 @@ const GetOneReview = async (req, res) => {
   try {
     const review = await Review.findOne()
     res.send(review)
-  } catch (error) {
-    throw error
-  }
-}
-// get all reviews
-const GetAllReviews = async (req, res) => {
-  try {
-    const reviews = await Reviews.findAll()
-    res.send(reviews)
   } catch (error) {
     throw error
   }

@@ -2,6 +2,7 @@ const Router = require("express").Router();
 const controller = require("../controllers/MemberController");
 const middleware = require("../middleware");
 
+//Member routes
 Router.get("/search", controller.ShowMemberByName);
 
 Router.get("/", controller.ShowAllMembers);
@@ -26,20 +27,11 @@ Router.delete(
 Router.post("/login", controller.Login);
 Router.post("/register", controller.Register);
 
-
-
-
-
 Router.put(
   "/password-update",
   middleware.stripToken,
   middleware.verifyToken,
   controller.UpdatePassword
-
 );
-
-)
-
-
 
 module.exports = Router;

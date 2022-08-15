@@ -17,8 +17,8 @@ const middleware = require('../middleware')
 //         res.status(401).send({status:'Error',msg:'Unauthorized'})
 //     }catch(error){throw error}
 // }
-pk
 
+/*
 const Login = async (req, res) => {
   try {
     const roaster = await Roaster.findOne({
@@ -100,8 +100,12 @@ const updateRoaster = async (req, res) => {
   } catch (error) {
     throw error
   }
+}
+*/
+
 
 const Login=async(req,res)=>{
+  console.log(req.body)
     try{
         const roaster=await Roaster.findOne({                    
             where:{email:req.body.email},
@@ -197,6 +201,11 @@ const findARoaster = async (req, res) => {
     throw error
   }
 }
+const CheckSession = async (req, res) => {
+  const { payload } = res.locals
+  res.send(payload)
+}
+
 
 module.exports = {
   updateRoaster,
@@ -206,5 +215,6 @@ module.exports = {
   findARoaster,
   Login,
   Register,
-  updatePassword
+  updatePassword,
+  CheckSession
 }

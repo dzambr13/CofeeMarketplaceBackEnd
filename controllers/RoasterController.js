@@ -105,12 +105,13 @@ const updateRoaster = async (req, res) => {
 
 
 const Login=async(req,res)=>{
-  console.log(req.body)
+  console.log("REQ.BODY = ",req.body)
     try{
         const roaster=await Roaster.findOne({                    
             where:{email:req.body.email},
             raw:true
         })
+        //console.log(roaster)
       if(roaster && (await middleware.comparePassword(          
         roaster.passwordDigest, req.body.password))){           
             let payload={id:roaster.id,email:roaster.email}

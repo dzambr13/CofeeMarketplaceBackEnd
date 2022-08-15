@@ -1,7 +1,5 @@
 const router = require('express').Router()
 
-
-//const controller = require('../controllers/RoasterController')
 const controller = require('../controllers/AuthController')
 
 const middleware = require('../middleware')

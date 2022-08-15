@@ -27,9 +27,25 @@ const Login = async (req, res) => {
 
 const Register = async (req, res) => {
   try {
-    const { email, password } = req.body
+    const {
+      userName,
+      businessName,
+      firstName,
+      lastName,
+      logoImageUrl,
+      email,
+      password          // <- becomes passwordDigest
+    }=req.body
     let passwordDigest = await middleware.hashPassword(password)
-    const roaster = await Roaster.create({ email, passwordDigest })
+    const roaster = await Roaster.create({
+      userName,
+      businessName,
+      firstName,
+      lastName,
+      logoImageUrl,
+      email,
+      passwordDigest
+    })
     res.send(roaster)
   } catch (error) {
     throw error

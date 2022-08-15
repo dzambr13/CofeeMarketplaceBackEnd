@@ -4,8 +4,6 @@ const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 
 
-
-
 const hashPassword=async (password)=>{                              // <--- hashing password
     let hashedPassword=await bcrypt.hash(password,SALT_ROUNDS)
     return hashedPassword

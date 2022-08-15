@@ -18,8 +18,4 @@ Router.delete(
   controller.deleteARoaster
 );
 
-Router.post("/login", controller.Login);                  // works
-Router.post("/register", controller.Register);            // works
-Router.put("/password-update",controller.updatePassword); // works
-
 module.exports = Router;

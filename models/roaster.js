@@ -1,16 +1,16 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Roaster extends Model {
     static associate(models) {
       Roaster.hasMany(models.Product, {
-        foreignKey: "roasterId",
-      }); 
+        foreignKey: 'roasterId'
+      })
       Roaster.belongsToMany(models.Member, {
         through: models.RoasterMember,
-        as: "roasters",
-        foreignKey: "roasterId",
-      });
+        as: 'roasters',
+        foreignKey: 'roasterId'
+      })
     }
   }
   Roaster.init(
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         validate: {
-        isEmail: true
+          isEmail: true
         }
       },
       firstName: DataTypes.STRING,
@@ -31,13 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      logoImageUrl: DataTypes.STRING,
+      logoImageUrl: DataTypes.STRING
     },
     {
       sequelize,
-      modelName: "Roaster",
-      tableName: "roasters",
+      modelName: 'Roaster',
+      tableName: 'roasters'
     }
-  );
-  return Roaster;
-};
+  )
+  return Roaster
+}
+// so i can pull

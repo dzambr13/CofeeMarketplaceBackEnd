@@ -4,18 +4,18 @@ const middleware = require("../middleware");
 const Op = Sequelize.Op;
 
 const Login = async (req, res) => {
-  try{
+  try {
     const member = await Member.findOne({
       where: { email: req.body.email },
       raw: true,
-    })
-    if(
+    });
+    if (
       member &&
       (await middleware.comparePassword(
         member.passwordDigest,
         req.body.password
       ))
-    ){
+    ) {
       let payload = { id: member.id, email: member.email };
       let token = middleware.createToken(payload);
       return res.send({ member: payload, token });
@@ -24,10 +24,11 @@ const Login = async (req, res) => {
   } catch (error) {
     throw error;
   }
-}
+};
 const Register = async (req, res) => {
   try {
-    const { userName, email, password, firstName, lastName, location }=req.body;
+    const { userName, email, password, firstName, lastName, location } =
+      req.body;
     let passwordDigest = await middleware.hashPassword(password);
     const member = await Member.create({
       userName,
@@ -36,7 +37,7 @@ const Register = async (req, res) => {
       firstName,
       lastName,
       location,
-    })
+    });
     res.status(200).json(member);
   } catch (error) {
     throw error;
@@ -54,10 +55,12 @@ const UpdatePassword = async (req, res) => {
     ) {
       let passwordDigest = await middleware.hashPassword(req.body.newPassword);
       await member.update({ passwordDigest });
-      res.status(200).json({ status: "Success", msg: "Password Updated" }) 
+      res.status(200).json({ status: "Success", msg: "Password Updated" });
     }
     res.status(401).send({ status: "Error", msg: "Invalid Credentials" });
-  }catch (error) {throw error}
+  } catch (error) {
+    throw error;
+  }
 };
 
 const AddNewMember = async (req, res) => {
@@ -66,7 +69,7 @@ const AddNewMember = async (req, res) => {
       ...req.body,
     };
     const newMember = await Member.create(newMemberInfo);
-    res.status(200).json(newMember)
+    res.status(200).json(newMember);
   } catch (error) {
     throw error;
   }
@@ -75,31 +78,33 @@ const AddNewMember = async (req, res) => {
 const ShowAllMembers = async (req, res) => {
   try {
     const allMembers = await Member.findAll();
-    res.send(200).json(allMembers)
+    // res.send(200).json(allMembers)
+    res.send(allMembers);
   } catch (error) {
     throw error;
   }
-}
+};
 const ShowMemberById = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
     const selectedMember = await Member.findByPk(memberId);
-    res.send(200).json(selectedMember)
+    // res.send(200).json(selectedMember);
+    res.send(selectedMember);
   } catch (error) {
     throw error;
   }
-}
+};
 const ShowMemberByName = async (req, res) => {
   try {
     let userName = req.body.query;
     let results = await Member.findAll({
       where: { userName: { [Op.like]: `%${userName}%` } },
     });
-    res.send(200).json(results)
+    res.send(200).json(results);
   } catch (error) {
     throw error;
   }
-}
+};
 const UpdateMember = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
@@ -108,7 +113,7 @@ const UpdateMember = async (req, res) => {
       where: { id: memberId },
       returning: true,
     });
-    res.send(200).json(memberToUpdate)
+    res.send(200).json(memberToUpdate);
   } catch (error) {
     throw error;
   }
@@ -120,11 +125,11 @@ const DeleteMember = async (req, res) => {
     await Member.destroy({
       where: { id: memberId },
     });
-    res.status(200).json(memberToDelete)
+    res.status(200).json(memberToDelete);
   } catch (error) {
     throw error;
   }
-}
+};
 
 module.exports = {
   ShowAllMembers,

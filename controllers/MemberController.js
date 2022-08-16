@@ -1,7 +1,7 @@
 const { Member } = require("../models");
 const Sequelize = require("sequelize");
 const middleware = require("../middleware");
-const Op = Sequelize.Op;
+// const Op = Sequelize.Op;
 
 const Login = async (req, res) => {
   try {
@@ -98,9 +98,9 @@ const ShowMemberByName = async (req, res) => {
   try {
     let userName = req.body.query;
     let results = await Member.findAll({
-      where: { userName: { [Op.like]: `%${userName}%` } },
+      where: { userName: { [Sequelize.Op.like]: `%${userName}%` } },
     });
-    res.send(200).json(results);
+    res.status(200).json(results);
   } catch (error) {
     throw error;
   }

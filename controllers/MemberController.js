@@ -1,7 +1,7 @@
 const { Member } = require("../models");
 const Sequelize = require("sequelize");
 const middleware = require("../middleware");
-const Op = Sequelize.Op;
+// const Op = Sequelize.Op;
 
 const AddNewMember = async (req, res) => {
   try {
@@ -18,8 +18,7 @@ const AddNewMember = async (req, res) => {
 const ShowAllMembers = async (req, res) => {
   try {
     const allMembers = await Member.findAll();
-    // res.send(200).json(allMembers)
-    res.send(allMembers);
+    res.status(200).json(allMembers);
   } catch (error) {
     throw error;
   }
@@ -28,8 +27,7 @@ const ShowMemberById = async (req, res) => {
   try {
     const memberId = parseInt(req.params.member_id);
     const selectedMember = await Member.findByPk(memberId);
-    // res.send(200).json(selectedMember);
-    res.send(selectedMember);
+    res.status(200).json(selectedMember);
   } catch (error) {
     throw error;
   }
@@ -38,9 +36,9 @@ const ShowMemberByName = async (req, res) => {
   try {
     let userName = req.body.query;
     let results = await Member.findAll({
-      where: { userName: { [Op.like]: `%${userName}%` } },
+      where: { userName: { [Sequelize.Op.like]: `%${userName}%` } },
     });
-    res.send(200).json(results);
+    res.status(200).json(results);
   } catch (error) {
     throw error;
   }
@@ -53,7 +51,7 @@ const UpdateMember = async (req, res) => {
       where: { id: memberId },
       returning: true,
     });
-    res.send(200).json(memberToUpdate);
+    res.status(200).json(memberToUpdate);
   } catch (error) {
     throw error;
   }

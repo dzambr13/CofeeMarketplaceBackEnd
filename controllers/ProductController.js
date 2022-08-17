@@ -1,6 +1,15 @@
 const { Product } = require("../models");
 const middleware = require("../middleware");
 
+
+
+
+const getSellerProducts=async (req,res)=>{
+  try {
+    
+  }catch(error){throw error}
+}
+
 const CreateProduct = async (req, res) => {
   try {
     const prod = await Product.create({ ...req.body });
@@ -40,14 +49,12 @@ const UpdateProduct = async (req, res) => {
 };
 const DeleteProduct = async (req, res) => {
   try {
-    const { pd } = req.params;
-    const deletedProduct = await Product.findByPd(pd);
-    let pdt = Object.assign({}, deletedProduct);
-    await Product.destroy({ where: { id: pd } });
-    res.status(200).json({
-      alert: `Deleted Product wiht an ID of ${pd}`,
-      destroyed: pd,
+    const productId = parseInt(req.params.pk);
+    const productToDelete = await Product.findByPk(productId);
+    await Product.destroy({
+      where: { id: productId },
     });
+    res.status(200).json(productToDelete);
   } catch (error) {
     throw error;
   }

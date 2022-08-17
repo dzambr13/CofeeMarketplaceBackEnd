@@ -1,6 +1,13 @@
 const { Product } = require('../models')
 const middleware = require('../middleware')
 
+const getSellerProducts = async (req, res) => {
+  try {
+  } catch (error) {
+    throw error
+  }
+}
+
 const CreateProduct = async (req, res) => {
   try {
     const prod = await Product.create({ ...req.body })
@@ -11,8 +18,8 @@ const CreateProduct = async (req, res) => {
 }
 const OneProduct = async (req, res) => {
   try {
-    const { pd } = req.params
-    const one = await Product.findByOr(pd)
+    const { id } = req.params
+    const one = await Product.findByPk(id)
     res.status(200).json(one)
   } catch (error) {
     throw error
@@ -20,7 +27,7 @@ const OneProduct = async (req, res) => {
 }
 const AllProducts = async (req, res) => {
   try {
-    const items = await Item.findAll()
+    const items = await Product.findAll()
     res.status(200).json(items)
   } catch (error) {
     throw error
@@ -28,9 +35,9 @@ const AllProducts = async (req, res) => {
 }
 const UpdateProduct = async (req, res) => {
   try {
-    const { pd } = req.params
+    const { pk } = req.params
     let updatedProduct = await Product.update(req.body, {
-      where: { id: pd },
+      where: { id: pk },
       returning: true
     })
     res.status(200).json(updatedProduct)
@@ -40,19 +47,17 @@ const UpdateProduct = async (req, res) => {
 }
 const DeleteProduct = async (req, res) => {
   try {
-    const { pd } = req.params
-    const deletedProduct = await Product.findByPd(pd)
-    let pdt = Object.assign({}, deletedProduct)
-    await Product.destroy({ where: { id: pd } })
-    res.status(200).json({
-      alert: `Deleted Product wiht an ID of ${pd}`,
-      destroyed: pd
+    const productId = parseInt(req.params.pk)
+    const productToDelete = await Product.findByPk(productId)
+    await Product.destroy({
+      where: { id: productId }
     })
+    res.status(200).json(productToDelete)
   } catch (error) {
     throw error
   }
 }
-// make a post product
+
 module.exports = {
   CreateProduct,
   AllProducts,

@@ -1,26 +1,26 @@
-const router = require('express').Router()
-const controller = require('../controllers/ProductController')
-const middleware = require('../middleware')
+const router = require("express").Router();
+const controller = require("../controllers/ProductController");
+const middleware = require("../middleware");
 
-router.get('/', controller.OneProduct)
+router.get("/:id", controller.OneProduct);
 router.post(
-  '/create',
+  "/create",
+
   middleware.stripToken,
   middleware.verifyToken,
   controller.CreateProduct
-) //Add protection
-router.get('/', controller.AllProducts)
+); //Add protection
+router.get("/", controller.AllProducts);
 router.put(
-  '/update/:id',
+  "/update/:pk",
   middleware.stripToken,
   middleware.verifyToken,
   controller.UpdateProduct
-) //Add protection
+); //Add protection
 router.delete(
-  '/delete/:pd',
+  "/delete/:pk",
   middleware.stripToken,
   middleware.verifyToken,
   controller.DeleteProduct
-) //Add protection
-
-module.exports = router
+); //Add protection
+module.exports = router;

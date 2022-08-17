@@ -12,7 +12,7 @@ router.post(
 ); //Add protection
 router.get("/", controller.AllProducts);
 router.put(
-  "/update/:id",
+  "/update/:pk",
   middleware.stripToken,
   middleware.verifyToken,
   controller.UpdateProduct

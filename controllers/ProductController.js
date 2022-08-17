@@ -37,9 +37,9 @@ const AllProducts = async (req, res) => {
 };
 const UpdateProduct = async (req, res) => {
   try {
-    const { pd } = req.params;
+    const { pk } = req.params;
     let updatedProduct = await Product.update(req.body, {
-      where: { id: pd },
+      where: { id: pk },
       returning: true,
     });
     res.status(200).json(updatedProduct);

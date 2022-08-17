@@ -23,5 +23,3 @@ app.get("/", (req, res) => res.json({ message: "Server Works" }));
 app.use("/api", AppRouter);
 app.use("/auth", AuthRouter);
 app.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`));
-
-//cleanup part 2

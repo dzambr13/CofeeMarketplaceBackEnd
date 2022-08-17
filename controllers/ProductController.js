@@ -11,8 +11,8 @@ const CreateProduct = async (req, res) => {
 };
 const OneProduct = async (req, res) => {
   try {
-    const { pd } = req.params.pd;
-    const one = await Product.findByPk(pd);
+    const { id } = req.params;
+    const one = await Product.findByPk(id);
     res.status(200).json(one);
   } catch (error) {
     throw error;
@@ -20,7 +20,7 @@ const OneProduct = async (req, res) => {
 };
 const AllProducts = async (req, res) => {
   try {
-    const items = await Item.findAll();
+    const items = await Product.findAll();
     res.status(200).json(items);
   } catch (error) {
     throw error;

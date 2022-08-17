@@ -2,7 +2,7 @@ const router = require("express").Router();
 const controller = require("../controllers/ProductController");
 const middleware = require("../middleware");
 
-router.get("/", controller.OneProduct);
+router.get("/:id", controller.OneProduct);
 router.post(
   "/create",
 

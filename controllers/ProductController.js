@@ -52,7 +52,7 @@ const DeleteProduct = async (req, res) => {
     throw error
   }
 }
-
+// make a post product
 module.exports = {
   CreateProduct,
   AllProducts,

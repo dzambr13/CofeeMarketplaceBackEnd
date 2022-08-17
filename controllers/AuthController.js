@@ -7,7 +7,7 @@ const Login = async (req, res) => {
     let user=await Roaster.findOne({where: { email: req.body.email },raw: true})
     user?console.log('found a roaster'):user=await Member.findOne({where: { email: req.body.email },raw: true})
     if(user && (await middleware.comparePassword(user.passwordDigest, req.body.password))){ 
-      let payload={id:user.id,email:user.email}
+      let payload={user}
       let token=middleware.createToken(payload)
       return res.send({user:payload,token})
     }

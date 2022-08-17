@@ -18,7 +18,7 @@ router.put(
   controller.UpdateProduct
 ); //Add protection
 router.delete(
-  "/delete/:pd",
+  "/delete/:pk",
   middleware.stripToken,
   middleware.verifyToken,
   controller.DeleteProduct

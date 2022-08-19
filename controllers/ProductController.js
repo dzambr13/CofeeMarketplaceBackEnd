@@ -1,12 +1,24 @@
+
+const { Product } = require("../models");
+const Sequelize = require("sequelize");
+const middleware = require("../middleware");
+
 const { Product } = require('../models')
 const middleware = require('../middleware')
+
 
 const getSellerProducts = async (req, res) => {
   try {
   } catch (error) {
+
+    throw error;
+  }
+};
+
     throw error
   }
 }
+
 
 const CreateProduct = async (req, res) => {
   try {
@@ -24,7 +36,26 @@ const OneProduct = async (req, res) => {
   } catch (error) {
     throw error
   }
+
+};
+
+const ShowProductByName = async (req, res) => {
+  try {
+    console.log(req.body);
+    let productName = req.body.query;
+    console.log("This is your search query: ", productName);
+    let results = await Product.findAll({
+      where: { name: { [Sequelize.Op.like]: `%${productName}%` } },
+    });
+    console.log(results);
+    res.status(200).json(results);
+  } catch (error) {
+    throw error;
+  }
+};
+
 }
+
 const AllProducts = async (req, res) => {
   try {
     const items = await Product.findAll()
@@ -62,6 +93,7 @@ module.exports = {
   CreateProduct,
   AllProducts,
   OneProduct,
+  ShowProductByName,
   UpdateProduct,
   DeleteProduct
 }

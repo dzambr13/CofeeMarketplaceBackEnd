@@ -1,34 +1,71 @@
-const {Roaster,Member} = require('../models')
+const { Roaster, Member } = require('../models')
 const middleware = require('../middleware')
 
 const Login = async (req, res) => {
   console.log(req.body)
-  try{
-    let user=await Roaster.findOne({where: { email: req.body.email },raw: true})
-    user?console.log('found a roaster'):user=await Member.findOne({where: { email: req.body.email },raw: true})
-    if(user && (await middleware.comparePassword(user.passwordDigest, req.body.password))){ 
-      let payload={user}
-      let token=middleware.createToken(payload)
-      return res.send({user:payload,token})
+  try {
+    let user = await Roaster.findOne({
+      where: { email: req.body.email },
+      raw: true
+    })
+    user
+      ? console.log('found a roaster')
+      : (user = await Member.findOne({
+          where: { email: req.body.email },
+          raw: true
+        }))
+    if (
+      user &&
+      (await middleware.comparePassword(user.passwordDigest, req.body.password))
+    ) {
+      let payload = { user }
+      let token = middleware.createToken(payload)
+      return res.send({ user: payload, token })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
-  }catch(error){throw error}
+  } catch (error) {
+    throw error
+  }
 }
 
-const Register = async (req, res) => { 
+const Register = async (req, res) => {
   try {
-    let user,passwordDigest
-    if(req.body.businessName){
-      const {userName,businessName,firstName,lastName,logoImageUrl,email,password}=req.body
+    let user, passwordDigest
+    if (req.body.businessName) {
+      const {
+        userName,
+        businessName,
+        firstName,
+        lastName,
+        logoImageUrl,
+        email,
+        password
+      } = req.body
       passwordDigest = await middleware.hashPassword(password)
-      user=await Roaster.create({userName,businessName,firstName,lastName,logoImageUrl,email,passwordDigest})
-    }else{
-      const {userName,firstName,lastName,email,password}=req.body
+      user = await Roaster.create({
+        userName,
+        businessName,
+        firstName,
+        lastName,
+        logoImageUrl,
+        email,
+        passwordDigest
+      })
+    } else {
+      const { userName, firstName, lastName, email, password } = req.body
       passwordDigest = await middleware.hashPassword(password)
-      user=await Member.create({userName,firstName,lastName,email,passwordDigest})
+      user = await Member.create({
+        userName,
+        firstName,
+        lastName,
+        email,
+        passwordDigest
+      })
     }
     res.send(user)
-  }catch(error){throw error}
+  } catch (error) {
+    throw error
+  }
 }
 
 const UpdatePassword = async (req, res) => {
@@ -47,7 +84,9 @@ const UpdatePassword = async (req, res) => {
       return res.send({ status: 'Ok', payload: user })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
-  } catch (error) {}
+  } catch (error) {
+    throw error
+  }
 }
 
 const CheckSession = async (req, res) => {

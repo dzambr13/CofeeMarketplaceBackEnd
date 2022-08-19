@@ -60,8 +60,8 @@
 ### **_Future Updates_**
 
 - [] Add review functionality
-- [] TBD
-- [] TBD
+- [] Products get added to profile page
+- [] Get search bar to work in front end
 
 ---
 

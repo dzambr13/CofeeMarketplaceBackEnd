@@ -49,13 +49,21 @@
 
 ### **_Screenshots_**
 
+### Homepage
+
+![Homepage](https://cdn.discordapp.com/attachments/994991543712751756/1010173635534803064/unknown.png)
+
+### Shop page
+
+![Shoppage](https://cdn.discordapp.com/attachments/994991543712751756/1010173991710883870/unknown.png)
+
 ### CHD
 
-![CHD](https://cdn.discordapp.com/attachments/994991543712751756/1007641852717056030/unknown.png)
+![CHD](https://cdn.discordapp.com/attachments/994991543712751756/1010173201176854578/unknown.png)
 
 ### ERD
 
-![ERD](https://cdn.discordapp.com/attachments/994991543712751756/1007642066609782794/unknown.png)
+![ERD](https://cdn.discordapp.com/attachments/994991543712751756/1010173380370116668/unknown.png)
 
 ### **_Future Updates_**
 

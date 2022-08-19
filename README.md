@@ -4,6 +4,10 @@
 
 ## By: James Jewitt, Leon Glaser, Dave Zambrano
 
+[Frontend Repo](https://github.com/dzambr13/CoffeeMarketplaceFrontEnd)
+[Trello board](https://trello.com/b/TCsr67Pj/coffee-tea)
+[Deployed Version](https://protected-escarpment-45651.herokuapp.com)
+
 ### James Jewitt
 
 [LinkedIn](https://www.linkedin.com/in/james-jewitt/) |
@@ -13,8 +17,8 @@
 ### Leon Glaser
 
 [LinkedIn](https://www.linkedin.com/in/leon-glaser) |
-[Twitter](https://twitter.com/sirescapist) |
 [GitHub](https://github.com/lnglaser)
+[Twitter](https://twitter.com/sirescapist) |
 
 ### Dave Zambrano
 
@@ -30,9 +34,7 @@
 
 ### MVP
 
-**Initial functionality will enable roasters and clients to register and log into the app. Clients will be able to edit their account info, and save products and roasters to a list. Roasters will be able to add, edit and delete products that they offer.**
-
----
+## **Initial functionality will enable roasters and clients to register and log into the app. Roasters will be able to add, edit and delete products that they offer.**
 
 ### **_Technologies used_**
 
@@ -67,9 +69,12 @@
 
 ### **_Future Updates_**
 
-- [] Add review functionality
+### **_Future Updates_**
+
+- [x] Get search bar to work in front end
+- [] Users will be able to edit their account info from frontend
+- [] Users will be able to save products and roasters to a list.
 - [] Products get added to profile page
-- [] Get search bar to work in front end
 
 ---
 

@@ -49,14 +49,6 @@
 
 ### **_Screenshots_**
 
-### Homepage
-
-![Homepage](https://cdn.discordapp.com/attachments/994991543712751756/1010173635534803064/unknown.png)
-
-### Shop page
-
-![Shoppage](https://cdn.discordapp.com/attachments/994991543712751756/1010173991710883870/unknown.png)
-
 ### CHD
 
 ![CHD](https://cdn.discordapp.com/attachments/994991543712751756/1010173201176854578/unknown.png)
@@ -68,16 +60,10 @@
 ### **_Future Updates_**
 
 - [] Add review functionality
-- [] Products get added to profile page
-- [] Get search bar to work in front end
 
 ---
 
 ### **_Credits_**
-
-#### [Heroku] (https://protected-escarpment-45651.herokuapp.com/)
-
-#### [Trello] (https://trello.com/b/TCsr67Pj/coffee-tea)
 
 #### [Markdown] (https://github.com/SEI-R-6-21/u1_hw_markdown)
 
